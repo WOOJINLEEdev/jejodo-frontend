@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.js": "/jejodo-frontend/static/js/main.a94aff8f.js",
+    "static/js/787.fc33ff55.chunk.js": "/jejodo-frontend/static/js/787.fc33ff55.chunk.js",
+    "static/media/banner_pattern.svg": "/jejodo-frontend/static/media/banner_pattern.14b51f99ef7e5d8ad6c68f04cc095f21.svg",
+    "static/media/차차.svg": "/jejodo-frontend/static/media/차차.6ff63259df238bb8a41cf4a1c976dd1d.svg",
+    "static/media/banner_char.svg": "/jejodo-frontend/static/media/banner_char.e20db8d9528e6508cfe3cfb0cb9c0d38.svg",
+    "static/media/소잃고뇌약간고침.svg": "/jejodo-frontend/static/media/소잃고뇌약간고침.7f0c0fbc4764d587df16215233dcafe6.svg",
+    "static/media/이름.svg": "/jejodo-frontend/static/media/이름.e456c5da4fb7bd859a39a1134973150e.svg",
+    "static/media/성희.svg": "/jejodo-frontend/static/media/성희.b69f17a602f3fd1132b9aaef9f9a784b.svg",
+    "static/media/목하.svg": "/jejodo-frontend/static/media/목하.4e92d58c4601d75b5920c9953ec9dc7a.svg",
+    "static/media/공인즙개사.svg": "/jejodo-frontend/static/media/공인즙개사.22586e2e8aaef47fa7f70de1838afd79.svg",
+    "static/media/AI.svg": "/jejodo-frontend/static/media/AI.7ea945f5c3b7af28497751a7035e8154.svg",
+    "static/media/inactive.svg": "/jejodo-frontend/static/media/inactive.646f625010577d8df0f86c20cfa67faa.svg",
+    "index.html": "/jejodo-frontend/index.html",
+    "static/media/pagination4.svg": "/jejodo-frontend/static/media/pagination4.c01f03cdfe845d814172b91dff864c76.svg",
+    "static/media/pagination1.svg": "/jejodo-frontend/static/media/pagination1.301a58ae23b69c33cdc37a44fe796a05.svg",
+    "static/media/pagination3.svg": "/jejodo-frontend/static/media/pagination3.1d6525c9ad1f3f6711b66493f572518f.svg",
+    "static/media/pagination2.svg": "/jejodo-frontend/static/media/pagination2.14822d81b0d632c1e110069e6b172645.svg",
+    "static/media/Group 147.svg": "/jejodo-frontend/static/media/Group 147.87f4f0a5055fd1615e06ca5e86d8819c.svg",
+    "main.a94aff8f.js.map": "/jejodo-frontend/static/js/main.a94aff8f.js.map",
+    "787.fc33ff55.chunk.js.map": "/jejodo-frontend/static/js/787.fc33ff55.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/js/main.a94aff8f.js"
+  ]
+}
