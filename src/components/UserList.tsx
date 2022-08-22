@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
+import dompurify from "dompurify";
 import { atom, selector, useRecoilState, useRecoilValue } from "recoil";
 
 import { filterState } from "components/Filter";
@@ -58,7 +59,8 @@ export const filteredUserListState = selector({
 
     return filteredUserList.filter(
       (user) =>
-        user.nickname === selectedKeyword || user.oname === selectedKeyword
+        user.nickname.toLowerCase().includes(selectedKeyword.toLowerCase()) ||
+        user.oname.toLowerCase().includes(selectedKeyword.toLowerCase())
     );
   },
 });
@@ -67,6 +69,8 @@ const UserList = ({ offset, offsetLimit }: IUserListProps) => {
   const [userList, setUserList] = useRecoilState(userListState);
   const filteredUserList = useRecoilValue(filteredUserListState);
   const selectedKeyword = useRecoilValue(selectedKeywordState);
+
+  const sanitizer = dompurify.sanitize;
 
   useEffect(() => {
     axios
@@ -101,6 +105,15 @@ const UserList = ({ offset, offsetLimit }: IUserListProps) => {
     }
   }
 
+  function getHighlightedSearchHtml(name: string, keyword: string) {
+    const regex = new RegExp(keyword, "gi");
+
+    return name.replaceAll(
+      regex,
+      `<mark className="highlight">${keyword.toLowerCase()}</mark>`
+    );
+  }
+
   return (
     <UserListContainer>
       {filteredUserList.slice(offset, offsetLimit).map((item, i) => {
@@ -109,15 +122,15 @@ const UserList = ({ offset, offsetLimit }: IUserListProps) => {
             {getUserImage(item.nickname)}
             <div className="user_info">
               <div className="info_top_wrapper">
-                <span
-                  className={
-                    selectedKeyword === item.nickname
-                      ? "nickname highlight"
-                      : "nickname"
-                  }
-                >
-                  {item.nickname}
-                </span>
+                <pre
+                  className="nickname"
+                  dangerouslySetInnerHTML={{
+                    __html: sanitizer(
+                      getHighlightedSearchHtml(item.nickname, selectedKeyword)
+                    ),
+                  }}
+                />
+
                 <span className="building_count">
                   지구家 아파트 {item.building_count}개
                 </span>
@@ -126,25 +139,25 @@ const UserList = ({ offset, offsetLimit }: IUserListProps) => {
               <div className="info_bottom_wrapper">
                 <div className="name_wrap">
                   <span className="name_icon">제</span>
-                  <span
-                    className={
-                      selectedKeyword === item.nickname
-                        ? "name highlight"
-                        : "name"
-                    }
-                  >
-                    {item.nickname}
-                  </span>
+                  <pre
+                    className="name"
+                    dangerouslySetInnerHTML={{
+                      __html: sanitizer(
+                        getHighlightedSearchHtml(item.nickname, selectedKeyword)
+                      ),
+                    }}
+                  />
                 </div>
                 <div className="name_wrap">
                   <span className="name_icon oname">오</span>
-                  <span
-                    className={
-                      selectedKeyword === item.oname ? "name highlight" : "name"
-                    }
-                  >
-                    {item.oname}
-                  </span>
+                  <pre
+                    className="name"
+                    dangerouslySetInnerHTML={{
+                      __html: sanitizer(
+                        getHighlightedSearchHtml(item.oname, selectedKeyword)
+                      ),
+                    }}
+                  />
                 </div>
               </div>
             </div>

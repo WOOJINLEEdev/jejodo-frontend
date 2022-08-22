@@ -1,4 +1,11 @@
-import { ChangeEvent, FormEvent, useState } from "react";
+import {
+  ChangeEvent,
+  FormEvent,
+  useEffect,
+  useState,
+  useRef,
+  KeyboardEvent,
+} from "react";
 import styled from "styled-components";
 import {
   atom,
@@ -39,20 +46,71 @@ export const selectedKeywordState = atom({
 
 const Search = () => {
   const [search, setSearch] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+  const [index, setIndex] = useState<number>(-1);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const resultRef = useRef<HTMLUListElement>(null);
 
   const keywordList = useRecoilValue(keywordListState(search));
   const setSelectedKeyword = useSetRecoilState(selectedKeywordState);
 
+  useEffect(() => {
+    window.addEventListener("click", handleOutsideClick);
+    return () => {
+      window.removeEventListener("click", handleOutsideClick);
+    };
+  }, []);
+
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (search) {
+      setSelectedKeyword(search);
+    }
   };
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearch(e.currentTarget.value);
+    setIsOpen(true);
   };
 
   const handleResultItemClick = (result: string) => {
     setSelectedKeyword(result);
+    setSearch(result);
+  };
+
+  const handleOutsideClick = (e: MouseEvent) => {
+    if (!searchRef?.current?.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
+  };
+
+  const handleSearchKeyUp = (e: KeyboardEvent) => {
+    if (keywordList.length > 0) {
+      switch (e.key) {
+        case "ArrowDown":
+          setIndex(index + 1);
+          if (resultRef.current?.childElementCount === index + 1) setIndex(0);
+          break;
+        case "ArrowUp":
+          setIndex(index - 1);
+          if (index <= 0) {
+            setIndex(-1);
+          }
+          break;
+        case "Escape":
+          setIndex(-1);
+          break;
+        case "Enter":
+          if (index >= 0) {
+            setSelectedKeyword(keywordList[index]);
+            setSearch(keywordList[index]);
+            searchRef?.current?.blur();
+            setIsOpen(false);
+            setIndex(-1);
+          }
+          break;
+      }
+    }
   };
 
   return (
@@ -63,11 +121,13 @@ const Search = () => {
         </label>
         <input
           type="text"
-          className="search_input"
           id="searchInput"
+          className="search_input"
           placeholder="검색"
           value={search}
+          ref={searchRef}
           onChange={handleSearchChange}
+          onKeyUp={handleSearchKeyUp}
         />
 
         <button type="submit" className="submit_btn" aria-label="검색 버튼">
@@ -75,21 +135,21 @@ const Search = () => {
         </button>
       </Form>
 
-      {keywordList.length > 0 && (
-        <div className="search_result">
+      {isOpen && keywordList.length > 0 && (
+        <ul className="search_result" ref={resultRef}>
           {keywordList.map((keyword, i) => {
             return (
-              <div
+              <li
                 key={`result_item_${i}`}
-                className="result_item"
+                className={index === i ? "result_item is_focus" : "result_item"}
                 role="button"
                 onClick={() => handleResultItemClick(keyword)}
               >
                 <span className="result_text">{keyword}</span>
-              </div>
+              </li>
             );
           })}
-        </div>
+        </ul>
       )}
     </SearchContainer>
   );
@@ -123,6 +183,10 @@ const SearchContainer = styled.div`
       padding-left: 21px;
       height: 36px;
       cursor: pointer;
+
+      &.is_focus {
+        background: #eeeeee;
+      }
 
       .result_text {
         display: inline-block;

@@ -14,6 +14,10 @@ export const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
+  mark {
+    background: rgba(68, 152, 242, 0.5);
+  }
+
   .visually_hidden {
     position: absolute;
     width: 1px;
@@ -24,9 +28,5 @@ export const GlobalStyle = createGlobalStyle`
     overflow: hidden;
     clip: rect(1px, 1px, 1px, 1px);
     clip-path: inset(50%);
-  }
-
-  .highlight {
-    background: rgba(68, 152, 242, 0.5);
   }
 `;
