@@ -110,7 +110,7 @@ const UserList = ({ offset, offsetLimit }: IUserListProps) => {
 
     return name.replaceAll(
       regex,
-      `<mark className="highlight">${keyword.toLowerCase()}</mark>`
+      (match) => `<mark className="highlight">${match}</mark>`
     );
   }
 
