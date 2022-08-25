@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.js": "/jejodo-frontend/static/js/main.12afb549.js",
+    "main.js": "/jejodo-frontend/static/js/main.ce1a81be.js",
     "static/js/787.fc33ff55.chunk.js": "/jejodo-frontend/static/js/787.fc33ff55.chunk.js",
     "static/media/banner_pattern.svg": "/jejodo-frontend/static/media/banner_pattern.14b51f99ef7e5d8ad6c68f04cc095f21.svg",
     "static/media/차차.svg": "/jejodo-frontend/static/media/차차.6ff63259df238bb8a41cf4a1c976dd1d.svg",
@@ -18,10 +18,10 @@
     "static/media/pagination3.svg": "/jejodo-frontend/static/media/pagination3.1d6525c9ad1f3f6711b66493f572518f.svg",
     "static/media/pagination2.svg": "/jejodo-frontend/static/media/pagination2.14822d81b0d632c1e110069e6b172645.svg",
     "static/media/Group 147.svg": "/jejodo-frontend/static/media/Group 147.87f4f0a5055fd1615e06ca5e86d8819c.svg",
-    "main.12afb549.js.map": "/jejodo-frontend/static/js/main.12afb549.js.map",
+    "main.ce1a81be.js.map": "/jejodo-frontend/static/js/main.ce1a81be.js.map",
     "787.fc33ff55.chunk.js.map": "/jejodo-frontend/static/js/787.fc33ff55.chunk.js.map"
   },
   "entrypoints": [
-    "static/js/main.12afb549.js"
+    "static/js/main.ce1a81be.js"
   ]
 }
